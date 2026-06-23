@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Het gezamenlijke verhaal – Transformatie Palliatieve Zorg Midden-Nederland</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --dk-green:  #46571B;
+  --mid-green: #5A7020;
+  --lt-green:  #93AB67;
+  --pale:      #EBF1E0;
+  --yellow:    #EBDC86;
+  --white:     #FFFFFF;
+  --off-white: #F5F7F0;
+  --text:      #2C2C2C;
+  --muted:     #6B7A5A;
+  --border:    #D0DDB5;
+  --radius:    12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.7; }
+
+/* HEADER */
+.site-header { background: var(--dk-green); padding: 32px 40px 24px; position: relative; overflow: hidden; }
+.site-header::after { content:''; position:absolute; right:-50px; top:-50px; width:240px; height:240px; border-radius:50%; background:rgba(147,171,103,.10); pointer-events:none; }
+.header-tag   { font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--lt-green); margin-bottom:8px; }
+.header-title { font-family:'Lora',serif; font-size:26px; font-weight:600; color:var(--white); margin-bottom:5px; }
+.header-sub   { font-size:14px; font-style:italic; color:var(--yellow); }
+.header-bar   { height:3px; background:var(--lt-green); margin-top:22px; border-radius:2px; }
+
+/* MAIN GRID */
+.main-grid { max-width: 1100px; margin: 0 auto; padding: 32px 32px 60px; }
+
+/* INTRO ZONE */
+.intro-zone { margin-bottom: 40px; }
+.intro-zone-label { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:14px; padding-left:2px; }
+.intro-grid { display:grid; grid-template-columns:1.3fr 1.0fr; gap:10px; }
+.intro-section { background:var(--white); border-radius:var(--radius); box-shadow:0 3px 12px rgba(70,87,27,.12); padding:20px 22px; margin-bottom:10px; }
+.intro-section:last-child { margin-bottom:0; }
+.intro-section-kernelementen { grid-row:span 2; margin-bottom:0; }
+.intro-heading { font-size:12px; font-weight:700; color:var(--dk-green); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; display:flex; align-items:center; gap:7px; }
+.intro-heading::before { content:''; display:inline-block; width:3px; height:13px; background:var(--lt-green); border-radius:2px; flex-shrink:0; }
+.intro-text { font-size:13.5px; line-height:1.75; color:#3A3A3A; }
+.kernelementen { margin-top:10px; }
+.kernelement { display:flex; gap:12px; margin-bottom:9px; align-items:flex-start; }
+.kernelement:last-child { margin-bottom:0; }
+.ke-num { width:22px; height:22px; border-radius:50%; background:var(--dk-green); color:var(--white); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.ke-text { font-size:13px; color:#3A3A3A; line-height:1.65; }
+
+/* SECTION HEADINGS */
+.section-heading { font-family:'Lora',serif; font-size:18px; font-weight:600; color:var(--dk-green); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.section-heading::before { content:''; display:inline-block; width:3px; height:18px; background:var(--lt-green); border-radius:2px; flex-shrink:0; }
+
+/* STORY SECTIONS */
+.story-section { margin-bottom: 32px; }
+.story-text p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:12px; }
+.story-text p:last-child { margin-bottom:0; }
+
+/* AMBITIE */
+.ambitie-block { background:var(--dk-green); border-radius:var(--radius); padding:22px 28px; margin-bottom:32px; }
+.ambitie-label { font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--lt-green); margin-bottom:10px; font-weight:700; }
+.ambitie-block p { font-size:15px; line-height:1.75; color:var(--white); font-style:italic; }
+
+/* DUO GRID */
+.duo-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:32px; align-items:stretch; margin-bottom:32px; }
+
+/* STAPPEN */
+.stap { background:var(--pale); border-radius:8px; padding:14px 16px; margin-bottom:10px; }
+.stap:last-child { margin-bottom:0; }
+.stap-titel { font-family:'Lora',serif; font-weight:600; color:var(--dk-green); font-size:14px; margin-bottom:6px; }
+.stap p { font-size:14px; line-height:1.75; color:var(--text); }
+
+/* ROL COLUMN */
+.duo-right { background:var(--pale); border-radius:var(--radius); padding:20px 22px; }
+.rol-selector-label { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:8px; }
+.rol-knoppen { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.rol-knop { padding:5px 13px; border-radius:20px; border:1.5px solid var(--border); background:var(--white); font-size:12px; cursor:pointer; color:var(--muted); transition:all .13s; font-family:inherit; white-space:nowrap; }
+.rol-knop:hover { border-color:var(--lt-green); color:var(--dk-green); }
+.rol-knop.active { background:var(--dk-green); border-color:var(--dk-green); color:var(--white); font-weight:700; }
+.rol-sectie-label { font-family:'Lora',serif; font-size:15px; font-weight:600; color:var(--dk-green); margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid var(--lt-green); }
+.rol-tekst p { font-size:14px; line-height:1.78; color:var(--text); margin-bottom:10px; }
+.rol-tekst p:last-child { margin-bottom:0; }
+
+/* COPY ROW */
+.copy-row { display:flex; align-items:center; gap:12px; margin-top:16px; padding-top:28px; border-top:1.5px solid var(--border); }
+.btn { padding:10px 22px; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; border:none; transition:all .13s; font-family:inherit; }
+.btn-p { background:var(--dk-green); color:var(--white); }
+.btn-p:hover { background:var(--mid-green); }
+.copy-msg { font-size:13px; color:var(--mid-green); display:none; }
+
+/* FOOTER */
+.site-footer { background:var(--dk-green); padding:16px 32px; text-align:center; }
+.site-footer p    { color:var(--white); font-size:13px; font-weight:600; margin-bottom:2px; }
+.site-footer span { color:var(--yellow); font-size:11px; font-style:italic; }
+.site-footer a { color:var(--yellow); text-decoration:underline; }
+
+/* MOBILE */
+@media(max-width:700px) {
+  .main-grid { padding: 20px 16px 40px; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .intro-section-kernelementen { grid-row: span 1; }
+  .site-header { padding: 22px 18px; }
+  .header-title { font-size: 22px; }
+  .duo-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-tag">Transformatie Palliatieve Zorg · Midden-Nederland</div>
+  <div class="header-title">Transformatieverhaal</div>
+  <div class="header-sub">Communicatiedocument</div>
+  <div class="header-bar"></div>
+</header>
+
+<div class="main-grid">
+
+  <!-- INTRO ZONE -->
+  <div class="intro-zone">
+    <div class="intro-grid">
+
+      <!-- Linker kolom: 2 intro-sections -->
+      <div>
+        <div class="intro-section">
+          <div class="intro-heading">Voor wie</div>
+          <div class="intro-text">Het is een verhaal waarin betrokkenen zich kunnen herkennen, ieder vanuit hun eigen praktijk. En het biedt een stevig en inspirerend vertrekpunt voor transformatieaanjagers en communicatieadviseurs die, ieder op hun eigen manier, bijdragen aan de transformatie palliatieve zorg.</div>
+        </div>
+        <div class="intro-section">
+          <div class="intro-heading">Wat dit verhaal is — en wat niet</div>
+          <div class="intro-text">Dit is geen kant-en-klare publicatietekst, maar een basisverhaal. Vanuit deze gezamenlijke kern worden sector- en organisatiespecifieke versies ontwikkeld voor zorg- en hulpverleners. Zo spreken we dezelfde taal, met ruimte voor eigen accenten. De tekst is grotendeels geschreven op B1-niveau, maar niet volledig. Gebruik dit als uitgangspunt, niet als een copy-paste document.</div>
+        </div>
+      </div>
+
+      <!-- Rechter kolom: kernelementen -->
+      <div class="intro-section intro-section-kernelementen">
+        <div class="intro-heading">De vier kernelementen</div>
+        <div class="intro-text" style="margin-bottom:12px;">Door gezamenlijk met andere organisaties in Midden-Nederland vier kernthema's integraal te implementeren, wordt palliatieve zorg steviger verankerd in de zorg.</div>
+        <div class="kernelementen">
+          <div class="kernelement">
+            <div class="ke-num">1</div>
+            <div class="ke-text">Het tijdig herkennen van de palliatieve fase en dat bespreken met patiënt en mede-zorgverleners (markeren)</div>
+          </div>
+          <div class="kernelement">
+            <div class="ke-num">2</div>
+            <div class="ke-text">Zodat vroeg en doorlopend gestart kan worden met het voeren van gesprekken over wensen, waarden en grenzen (proactieve zorgplanning)</div>
+          </div>
+          <div class="kernelement">
+            <div class="ke-num">3</div>
+            <div class="ke-text">Een casemanager wordt ingeschakeld die mede (naast de behandelaar) zorgt voor goede afstemming en overdracht tussen zorgverleners en organisaties (transmurale coördinatie en continuïteit van zorg)</div>
+          </div>
+          <div class="kernelement">
+            <div class="ke-num">4</div>
+            <div class="ke-text">Het tijdig inschakelen van expertise wanneer de zorg complex wordt (ondersteuning complexe casuïstiek)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DE OPENING -->
+  <div class="story-section">
+    <div class="section-heading">De opening</div>
+    <div class="story-text" id="txt-opening">
+      <p>Je ziet mensen op een bijzonder moment in hun leven. Mensen die erg kwetsbaar of ernstig ziek zijn en weten dat ze zullen overlijden. Soms gaat dat snel. Soms is er nog tijd om te leven. In die periode is er palliatieve zorg. En die zorg, die geef jij.</p>
+    </div>
+  </div>
+
+  <!-- WAT IS PALLIATIEVE ZORG -->
+  <div class="story-section">
+    <div class="section-heading">Wat is palliatieve zorg</div>
+    <div class="story-text" id="txt-wat">
+      <p>Palliatieve zorg gaat over het leven. Over nog in de tuin kunnen werken, dankzij goede pijnmedicatie. Over je kinderen naar school brengen, dankzij de juiste hulpmiddelen. Over minder bang zijn, dankzij een psycholoog of geestelijk verzorger. Over je gehoord en gezien voelen.</p>
+      <p>Palliatieve zorg gaat over lichamelijke zorg en het verlichten van klachten. Maar ook over psychische, sociale en zingevingszorg. En omdat iemand nooit alleen ziek is, hoort de ondersteuning van naasten er vanzelf bij.</p>
+      <p> Goede palliatieve zorg is er niet vanzelf. Thuiszorg of een hospice zijn door de drukte in de zorg niet altijd direct beschikbaar. Wat we wél kunnen verbeteren, is de organisatie daaromheen: heldere afspraken en een vast aanspreekpunt maken een groot verschil. Dat is precies wat we in onze regio, regio Midden-Nederland, willen bereiken.</p>
+    </div>
+  </div>
+
+  <!-- HET KWETSBARE PUNT -->
+  <div class="story-section">
+    <div class="section-heading">Het kwetsbare punt</div>
+    <div class="story-text" id="txt-kwetsbaar">
+      <p>Driekwart van de mensen in het laatste levensjaar ervaart dat goede palliatieve zorg niet vanzelf komt. Dat heeft niets te maken met de wil van zorgverleners. Die willen het beste voor hun patiënt.</p>
+      <p>Wat ontbreekt is soms de juiste kennis op het juiste moment, aandacht voor alle kanten van het leven van een patiënt, en goede afstemming tussen zorgverleners. Dan merkt een patiënt dat niemand het overzicht heeft. Dat zaken dubbel worden gedaan, of juist blijven liggen. Dat een gesprek over wensen en behoeften pas plaatsvindt tijdens een ongeplande spoedopname op de spoedeisende hulp, in plaats van thuis aan de keukentafel of bij de huisarts.</p>
+      <p>Wat we willen bereiken is dat iedereen in het laatste levensjaar kan rekenen op zorg die past. Zorg die tijdig begint, goed is afgestemd en aansluit bij wat de patiënt zelf wil. Dat is nu nog te veel een kwestie van geluk. Dat willen we veranderen.</p>
+    </div>
+  </div>
+
+  <!-- WAT GAAT ER AL GOED -->
+  <div class="story-section">
+    <div class="section-heading">Wat gaat er al goed</div>
+    <div class="story-text" id="txt-goedgaat">
+      <p>In de regio Midden-Nederland gaat er al veel goed. Er is een sterke basis van samenwerking tussen organisaties en netwerken. Er lopen initiatieven waarop we kunnen voortbouwen.</p>
+      <p>Die beweging laat zien: als zorgverleners elkaar tijdig weten te vinden en afspraken maken, wordt de zorg merkbaar beter. Beter voor patiënten en naasten. En ook voor jou als zorgverlener.</p>
+    </div>
+  </div>
+
+  <!-- AMBITIE -->
+  <div class="ambitie-block">
+    <div class="ambitie-label">De ambitie · Gezamenlijk scharnierpunt</div>
+    <p id="txt-ambitie">Onze gezamenlijke ambitie is helder: van een kwestie van geluk naar een staat van vertrouwen. Zodat iedereen in het laatste levensjaar kan rekenen op passende, goed georganiseerde palliatieve zorg.</p>
+  </div>
+
+  <!-- WAT LEVERT HET OP -->
+  <div class="story-section">
+    <div class="section-heading">Wat levert het op</div>
+    <div class="story-text" id="txt-oplevert">
+      <p>Als de zorg goed is georganiseerd, merk je dat in je werk. Je weet wie je moet bellen. Je weet wat de patiënt wil. Je staat er niet alleen voor. En de patiënt en diens naasten ervaren meer rust, meer regie en meer waardigheid.</p>
+      <p>Betere palliatieve zorg leidt ook tot minder onnodige zorg in de laatste levensfase. In de regio kan dat betekenen: tot 900 minder bezoeken aan de spoedeisende hulp per jaar, tot 10.500 minder klinische ligdagen per jaar, en tot 2.700 minder IC-ligdagen per jaar.</p>
+      <p>De inzet is arbeidsneutraal: het gaat om betere samenwerking en een duidelijkere structuur, niet om extra taken.</p>
+    </div>
+  </div>
+
+  <!-- DUO GRID: STAPPEN + ROL -->
+  <div class="section-heading" style="margin-bottom:12px;">Wat verandert er</div>
+  <p style="font-size:15px; line-height:1.8; color:var(--text); margin-bottom:20px;">We werken in de regio aan vier concrete stappen. Geen nieuwe, abstracte beleidstermen, maar veranderingen die je terugziet in je dagelijkse werk. Samen zorgen ze ervoor dat de zorg tijdig begint, goed is afgestemd en aansluit bij wat de patiënt wil.</p>
+  <div class="duo-grid">
+
+    <!-- Links: stappen -->
+    <div class="duo-left">
+      <div class="stap">
+        <div class="stap-titel">Signaleren & markeren</div>
+        <p style="margin-bottom:14px;">Signaleren dat het slechter gaat met iemand doet iedereen rondom de patiënt. Zorgverleners én mensen in de naaste omgeving. Of je nu wijkverpleegkundige, apotheker of huisarts bent: zie je dat het slechter gaat, dan geef je dat signaal door aan de behandelaar.</p>
+        <p>De behandelaar markeert. Een hulpvraag daarbij is de surprise question: zou ik verrast zijn als deze patiënt binnen een jaar overlijdt? Is het antwoord nee, dan is het tijd om te markeren. Dat gebeurt in het dossier en in gesprek met de patiënt. Daarna wordt de markering gedeeld met alle zorgverleners om de patiënt heen, zodat iedereen weet waar hij aan toe is.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-titel">Proactieve zorgplanning</div>
+        <p>Zodra iemand is gemarkeerd, start de behandelaar het gesprek over wensen, waarden en grenzen. Op alle vier dimensies: lichamelijk, psychisch, sociaal en spiritueel. Je wacht niet tot de patiënt erom vraagt, maar de patiënt bepaalt wel het tempo. Je legt de uitkomsten vast en deelt ze met collega's. De grenzen van de patiënt zijn altijd leidend.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-titel">Casemanager palliatieve zorg</div>
+        <p>De patiënt krijgt een vaste casemanager palliatieve zorg aangeboden. Die casemanager is aanspreekpunt voor de patiënt en naasten, houdt het overzicht, stemt af met alle betrokken zorgverleners en zorgt dat er geen dingen tussen wal en schip vallen. Dat hoeft de huisarts niet allemaal zelf te doen.</p>
+      </div>
+      <div class="stap">
+        <div class="stap-titel">Ondersteuning bij ingewikkelde situaties</div>
+        <p>Wordt de zorg complex? Dan hoef je er niet alleen voor te staan. Je weet waar je terecht kunt voor advies en ondersteuning, telefonisch of via een bedsiteconsult.</p>
+      </div>
+    </div>
+
+    <!-- Rechts: rol-selector + rol-tekst -->
+    <div class="duo-right">
+      <div class="rol-selector-label">Kies je rol</div>
+      <div class="rol-knoppen" id="rolKnoppen">
+        <button class="rol-knop active" data-rol="huisarts">Huisarts</button>
+        <button class="rol-knop" data-rol="poh">POH</button>
+        <button class="rol-knop" data-rol="medisch-specialist">Medisch specialist</button>
+        <button class="rol-knop" data-rol="wijkverpleging">Wijkverpleging</button>
+        <button class="rol-knop" data-rol="casemanager">Casemanager</button>
+        <button class="rol-knop" data-rol="overig">Overig</button>
+      </div>
+      <div class="rol-sectie-label" id="rolLabel">Wat vraagt dit van jou als huisarts</div>
+      <div class="rol-tekst" id="rolTekst"></div>
+    </div>
+
+  </div>
+
+  <!-- DE AFSLUITING -->
+  <div class="story-section">
+    <div class="section-heading">De afsluiting</div>
+    <div class="story-text" id="txt-slot">
+      <p>Van een kwestie van geluk naar een staat van vertrouwen. Dat is de koers in Midden-Nederland. Of iemand passende palliatieve zorg krijgt, mag niet afhangen van toeval. Niet van welke zorgprofessional je treft, of op welk moment je zorg nodig hebt.</p>
+      <p>Niemand doet dit alleen. De wijkverpleging signaleert, de huisarts markeert, de casemanager coördineert, en iedere collega draagt vanuit de eigen rol bij. We werken samen aan een staat van vertrouwen.</p>
+    </div>
+  </div>
+
+  <!-- COPY ROW -->
+  <div class="copy-row">
+    <button class="btn btn-p" onclick="copyStory()">Kopieer het hele verhaal</button>
+    <span class="copy-msg" id="copymsg">Gekopieerd.</span>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <p>Samenbouwen aan een staat van vertrouwen.</p>
+  <span>Transformatie Palliatieve Zorg Midden-Nederland · 2025–2027</span> <P></P>
+   <span>Opgesteld door
+<a href="mailto:anneloes.bork@tpz-midden.nl?subject=Transformatieverhaal">
+  Anneloes Bork
+</a>
+ </span>
+</footer>
+
+<script>
+const ROLLEN = {
+  "huisarts": {
+    label: "Huisarts",
+    tekst: `<p>Als huisarts speel jij vaak een centrale rol in de palliatieve fase. Je kent de patiënt en de thuissituatie, en je bent bij uitstek degene die het proces begeleidt.</p>
+<p>Je markeert de palliatieve fase en start de proactieve zorgplanning. Je stelt jezelf de surprise question: zou ik verrast zijn als deze patiënt binnen een jaar overlijdt? Als het antwoord nee is, markeer je in het dossier en in afstemming met andere betrokken zorgverleners.</p>
+<p>Je start het gesprek over wensen, waarden en grenzen op alle vier dimensies: lichamelijk, psychisch, sociaal en spiritueel. Dit is je proactieve zorg gesprek, je herhaalt deze gesprekken in de tijd. Je wacht niet tot de patiënt erom vraagt. En je meldt tijdig aan bij de casemanager palliatieve zorg, zodat het overzicht voor de patiënt geborgd is.</p>`
+  },
+  "poh": {
+    label: "POH",
+    tekst: `<p>Als praktijkondersteuner ben je een belangrijke schakel tussen de huisarts en de patiënt in de palliatieve fase. Je ziet patiënten regelmatig en hebt oog voor alle signalen vanuit de patiënt en bespreekt deze met de relevante zorgprofessional.</p>
+<p>Je ondersteunt bij het markeren en het voeren van proactieve zorgplanningsgesprekken. Je helpt de patiënt en naasten om wensen en grenzen te verwoorden en zorgt dat deze goed worden vastgelegd in het dossier.</p>
+<p>Je werkt nauw samen met de huisarts en de casemanager palliatieve zorg, en weet wanneer je wie moet inschakelen bij complexe vragen.</p>`
+  },
+  "medisch-specialist": {
+    label: "Medisch specialist",
+    tekst: `<p>Als medisch specialist zie je patiënten op een moment dat de ziekte centraal staat. Je bent vaak degene die als eerste het beeld heeft van wat er komen gaat.</p>
+<p>Je gebruikt de surprise question ook in de tweede lijn. Als je niet verrast zou zijn als een patiënt binnen een jaar overlijdt, markeer je dit en informeer je de huisarts. Je deelt het ook actief met andere betrokken zorgverleners.</p>
+<p>Je initieert of versterkt het gesprek over wensen en grenzen en legt de uitkomsten vast in het dossier. Een warme overdracht naar de eerstelijn doe je op het moment dat het hoofdbehandelaarschap overgaat naar de huisarts. Je weet waar je terecht kunt voor advies bij complexe palliatieve vraagstukken.</p>`
+  },
+  "wijkverpleging": {
+    label: "Wijkverpleging & thuiszorg",
+    tekst: `<p>Als wijkverpleegkundige of thuiszorgmedewerker zie je de patiënt in zijn eigen omgeving. Je ziet wat anderen niet zien: hoe iemand echt leeft, wat hem bezighoudt, wat er thuis speelt.</p>
+<p>Je signaleert veranderingen tijdig en brengt dit in bij de huisarts of casemanager. Je draagt actief bij aan het gesprek over wensen en waarden, ook als je niet degene bent die het gesprek leidt.</p>
+<p>Je werkt nauw samen met de casemanager palliatieve zorg en zorgt dat informatie over patiëntwensen beschikbaar en actueel is, ook buiten kantooruren. Je weet bij wie je terecht kunt voor ondersteuning bij complexe zorg thuis.</p>`
+  },
+  "casemanager": {
+    label: "Casemanager palliatieve zorg",
+    tekst: `<p>Als casemanager palliatieve zorg ben jij het vaste gezicht voor de patiënt en naasten. Niet degene die alle zorg levert, maar degene die het overzicht houdt en zorgt dat niets tussen wal en schip valt.</p>
+<p>Je volgt de patiënt door het hele traject. Je signaleert wat er speelt, op alle vier de dimensies. Je verbindt de zorgverleners om de patiënt heen en zorgt dat afspraken over wensen en grenzen zijn vastgelegd en bekend zijn bij iedereen die betrokken is.</p>
+<p>Je bewaakt of het gesprek over proactieve zorgplanning heeft plaatsgevonden en of de uitkomsten goed zijn gedeeld. Je voert dat gesprek niet per se zelf, maar je zorgt dat het gebeurt.</p>
+<p>Je bent er voor de patiënt en naasten als ze vragen hebben, twijfelen of ergens tegenaan lopen. En je schakelt tijdig aanvullende zorg of expertise in als de situatie daarom vraagt.</p>`
+  },
+  "overig": {
+    label: "Overige zorgverleners",
+    tekst: `<p>Of je nu apotheker, geestelijk verzorger, psycholoog, fysiotherapeut of maatschappelijk werker bent, palliatieve zorg vraagt ook iets van jou. Je bent onderdeel van het netwerk rondom de patiënt.</p>
+<p>Je bent alert op signalen dat een patiënt in het laatste levensjaar is en geeft dit door aan de huisarts of casemanager. Je draagt bij aan het gesprek over wensen en waarden vanuit je eigen expertise en houdt informatie actueel in het dossier.</p>
+<p>Je stemt af met de casemanager palliatieve zorg en weet welke palliatieve expertise beschikbaar is in de regio en hoe je die kunt inschakelen.</p>`
+  }
+};
+
+let activeRol = 'huisarts';
+
+function activeer(rol) {
+  activeRol = rol;
+  const r = ROLLEN[rol];
+  document.getElementById('rolLabel').textContent = 'Wat vraagt dit van jou als ' + r.label.toLowerCase();
+  document.getElementById('rolTekst').innerHTML = r.tekst;
+  document.querySelectorAll('.rol-knop').forEach(k => k.classList.toggle('active', k.dataset.rol === rol));
+}
+
+document.getElementById('rolKnoppen').addEventListener('click', e => {
+  const k = e.target.closest('.rol-knop');
+  if (k) activeer(k.dataset.rol);
+});
+
+function copyStory() {
+  const r = ROLLEN[activeRol];
+
+  function secHtml(heading, elId) {
+    return `<h2>${heading}</h2>${document.getElementById(elId).innerHTML.trim()}`;
+  }
+
+  const stappenHtml = Array.from(document.querySelectorAll('.stap')).map(s => {
+    const titel = s.querySelector('.stap-titel')?.innerText.trim() || '';
+    const tekst = s.querySelector('p')?.outerHTML || '';
+    return `<h3>${titel}</h3>${tekst}`;
+  }).join('');
+
+  const htmlParts = [
+    secHtml('De opening', 'txt-opening'),
+    secHtml('Wat is palliatieve zorg', 'txt-wat'),
+    secHtml('Het kwetsbare punt', 'txt-kwetsbaar'),
+    secHtml('Wat gaat er al goed', 'txt-goedgaat'),
+    `<h2>De ambitie</h2><p>${document.getElementById('txt-ambitie').innerText.trim()}</p>`,
+    secHtml('Wat levert het op', 'txt-oplevert'),
+    `<h2>Wat verandert er</h2>${stappenHtml}`,
+    `<h2>Wat vraagt dit van jou als ${r.label.toLowerCase()}</h2>${document.getElementById('rolTekst').innerHTML.trim()}`,
+    secHtml('De afsluiting', 'txt-slot'),
+  ];
+
+  const html = `<html><body>${htmlParts.join('')}</body></html>`;
+
+  const stappenTxt = Array.from(document.querySelectorAll('.stap'))
+    .map(s => s.innerText.trim()).join('\n\n');
+  const plainParts = [
+    document.getElementById('txt-opening').innerText.trim(),
+    document.getElementById('txt-wat').innerText.trim(),
+    document.getElementById('txt-kwetsbaar').innerText.trim(),
+    document.getElementById('txt-goedgaat').innerText.trim(),
+    document.getElementById('txt-ambitie').innerText.trim(),
+    document.getElementById('txt-oplevert').innerText.trim(),
+    stappenTxt,
+    'Wat vraagt dit van jou als ' + r.label.toLowerCase() + '\n\n' +
+      document.getElementById('rolTekst').innerText.trim(),
+    document.getElementById('txt-slot').innerText.trim()
+  ];
+  const plain = plainParts.join('\n\n');
+
+  navigator.clipboard.write([
+    new ClipboardItem({
+      'text/html': new Blob([html], { type: 'text/html' }),
+      'text/plain': new Blob([plain], { type: 'text/plain' }),
+    })
+  ]).then(() => {
+    const m = document.getElementById('copymsg');
+    if (m) { m.style.display = 'inline'; setTimeout(() => m.style.display = 'none', 2500); }
+  });
+}
+
+activeer('huisarts');
+</script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palliatieve zorg: jouw rol als huisarts – TPZ Midden-Nederland</title>
+<!-- Opgesteld door Anneloes Bork -->
+<style>
+  :root {
+    --dark-green:  #46571B;
+    --mid-green:   #5A7020;
+    --light-green: #93AB67;
+    --pale-green:  #EBF1E0;
+    --yellow:      #EBDC86;
+    --yellow-dark: #C8B84A;
+    --white:       #FFFFFF;
+    --off-white:   #F5F7F0;
+    --card-bg:     #F0F4E8;
+    --text:        #2C2C2C;
+    --muted:       #6B7A5A;
+    --border:      #D0DDB5;
+    --radius:      12px;
+    --shadow:      0 2px 16px rgba(70,87,27,.09);
+    --shadow-card: 0 3px 12px rgba(70,87,27,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Calibri, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  .site-header { background: var(--dark-green); padding: 32px 40px 24px; position: relative; overflow: hidden; display: flex; align-items: flex-start; gap: 20px; }
+  .site-header::after { content:''; position:absolute; right:-50px; top:-50px; width:240px; height:240px; border-radius:50%; background:rgba(147,171,103,.10); pointer-events:none; }
+  .header-logo { height: 56px; width: auto; flex-shrink: 0; position: relative; z-index: 1; }
+  .header-text { position: relative; z-index: 1; }
+  .header-tag   { font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--light-green); margin-bottom:8px; }
+  .header-title { font-size:26px; font-weight:700; color:var(--white); margin-bottom:5px; }
+  .header-sub   { font-size:14px; font-style:italic; color:var(--yellow); }
+  .header-bar   { height:3px; background:var(--light-green); margin-top:22px; border-radius:2px; }
+
+  /* MAIN GRID */
+  .main-grid { display:grid; grid-template-columns:1fr; max-width:1100px; margin:0 auto; padding:32px 32px 60px; }
+
+  /* INTRO GRID */
+  .intro-grid { display:grid; grid-template-columns:1.3fr 1.0fr; gap:10px; margin-bottom:12px; }
+  .intro-grid .intro-section-rechts { grid-row:span 2; margin-bottom:0; }
+
+  .intro-zone-label { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:14px; padding-left:2px; }
+
+  .intro-section { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-card); padding:20px 22px; margin-bottom:2px; transition:box-shadow .15s; }
+  .intro-section:last-child { margin-bottom:0; }
+  .intro-section:hover { box-shadow:0 4px 20px rgba(70,87,27,.16); }
+
+  .intro-heading { font-size:12px; font-weight:700; color:var(--dark-green); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; display:flex; align-items:center; gap:7px; }
+  .intro-heading::before { content:''; display:inline-block; width:3px; height:13px; background:var(--light-green); border-radius:2px; flex-shrink:0; }
+
+  .intro-text { font-size:13.5px; line-height:1.75; color:#3A3A3A; }
+
+  .blokken-lijst { margin-top:10px; }
+  .blok-item { display:flex; gap:12px; margin-bottom:9px; align-items:flex-start; }
+  .blok-item:last-child { margin-bottom:0; }
+  .blok-num { width:22px; height:22px; border-radius:50%; background:var(--dark-green); color:var(--white); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .blok-desc { font-size:13px; color:#3A3A3A; line-height:1.65; }
+
+  /* EDIT HINT */
+  .edit-hint-bar { background:var(--yellow); border-radius:var(--radius); padding:10px 16px; margin-bottom:24px; font-size:13px; color:var(--dark-green); display:flex; align-items:center; gap:8px; }
+  .edit-hint-bar strong { font-weight:700; }
+
+  /* LAYERS */
+  .layer { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden; }
+  .layer-head { display:flex; align-items:center; gap:12px; padding:14px 18px 10px; background:var(--off-white); border-bottom:1.5px solid var(--border); }
+  .layer-num  { width:28px; height:28px; border-radius:50%; background:var(--dark-green); color:var(--white); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .layer-title { font-size:16px; font-weight:700; color:var(--dark-green); }
+  .layer-desc  { font-size:12px; color:var(--muted); font-style:italic; margin-top:1px; }
+  .layer-body  { padding:16px 18px 6px; }
+
+  /* EDITABLE */
+  .editable { outline:none; border-radius:4px; transition:background .12s, box-shadow .12s; cursor:text; display:inline; }
+  .editable:hover { background:rgba(147,171,103,.15); }
+  .editable:focus { background:rgba(255,255,255,.95); box-shadow:0 0 0 2px var(--light-green); padding:1px 3px; margin:-1px -3px; }
+  .text-block { font-size:14px; line-height:1.78; color:var(--text); white-space:pre-wrap; display:block; }
+  .edit-hint-inline { font-size:10px; color:var(--light-green); font-style:italic; margin-bottom:6px; display:block; opacity:.7; }
+  .edit-hint-inline::before { content:'✏ '; }
+
+  /* FEEDBACK */
+  .feedback { border-top:1.5px solid var(--border); padding:12px 18px 14px; background:var(--off-white); margin-top:10px; }
+  .feedback-title { font-size:11px; font-weight:700; color:var(--dark-green); letter-spacing:.07em; text-transform:uppercase; margin-bottom:9px; }
+  .labels { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .lbtn { padding:5px 12px; border-radius:20px; border:1.5px solid var(--border); background:var(--white); font-size:11.5px; cursor:pointer; color:var(--muted); transition:all .13s; font-family:inherit; white-space:nowrap; }
+  .lbtn:hover { border-color:var(--light-green); color:var(--dark-green); }
+  .lbtn.active { font-weight:700; }
+  .lbtn.passend.active     { background:#D4EDBC; border-color:#6AAE4A; color:#2A5A1A; }
+  .lbtn.verkeerd.active    { background:#FDEBD0; border-color:#E67E22; color:#784212; }
+  .lbtn.onduidelijk.active { background:#D6EAF8; border-color:#2980B9; color:#1A4A6A; }
+  .lbtn.mist.active        { background:#FADBD8; border-color:#C0392B; color:#6A1A1A; }
+  textarea.fb { width:100%; padding:9px 11px; border:1.5px solid var(--border); border-radius:8px; font-size:13px; font-family:inherit; color:var(--text); background:var(--white); resize:vertical; min-height:60px; line-height:1.6; transition:border-color .13s; }
+  textarea.fb:focus { outline:none; border-color:var(--light-green); }
+  textarea.fb::placeholder { color:#AABBA0; }
+
+  /* PREVIEW */
+  .preview-wrap { background:var(--white); border:1.5px solid var(--light-green); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); margin-top:32px; }
+  .preview-head { background:var(--dark-green); padding:13px 20px; display:flex; align-items:center; justify-content:space-between; }
+  .preview-head h2 { color:var(--white); font-size:14px; font-weight:600; }
+  .preview-head span { font-size:12px; color:var(--light-green); font-style:italic; }
+  .preview-body { padding:22px 26px; font-size:14px; line-height:1.78; }
+  .preview-body p { margin-bottom:14px; white-space:pre-wrap; }
+  .preview-body p:last-child { margin-bottom:0; }
+
+  /* TABLE */
+  .table-wrap { padding:0 26px 26px; }
+  .table-wrap h3 { font-size:14px; font-weight:700; color:var(--dark-green); padding:20px 0 10px; border-bottom:2px solid var(--light-green); margin-bottom:12px; }
+  .ftable { width:100%; border-collapse:collapse; font-size:13px; }
+  .ftable th { background:var(--dark-green); color:var(--white); padding:9px 13px; text-align:left; font-weight:600; }
+  .ftable th:first-child { width:200px; }
+  .ftable td { padding:9px 13px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.6; }
+  .ftable tr:nth-child(even) td { background:var(--pale-green); }
+  .ftable tr:last-child td { border-bottom:none; }
+  .td-layer { font-weight:700; color:var(--dark-green); font-size:12px; }
+  .no-input { color:#bbb; font-style:italic; }
+
+  /* BUTTONS */
+  .btn-row { display:flex; gap:9px; padding:13px 20px; flex-wrap:wrap; border-top:1.5px solid var(--border); background:var(--off-white); align-items:center; }
+  .btn { padding:8px 18px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; border:none; transition:all .13s; font-family:inherit; }
+  .btn-p { background:var(--dark-green); color:var(--white); }
+  .btn-p:hover { background:var(--mid-green); }
+  .btn-g { background:transparent; color:var(--muted); border:1.5px solid #ccc; }
+  .btn-g:hover { border-color:var(--light-green); color:var(--dark-green); }
+  .copy-msg { font-size:12px; color:var(--mid-green); display:none; }
+
+  /* FOOTER */
+  .site-footer { background:var(--dark-green); padding:16px 32px; text-align:center; }
+  .site-footer p    { color:var(--white); font-size:13px; font-weight:600; margin-bottom:2px; }
+  .site-footer span { color:var(--yellow); font-size:11px; font-style:italic; }
+
+  /* INFO BLOK */
+  .info-blok { background:var(--pale-green); border-left:3px solid var(--light-green); border-radius:8px; padding:12px 14px; font-size:13px; }
+  .info-blok-title { font-weight:700; color:var(--dark-green); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .info-blok ul { margin-left:16px; margin-bottom:8px; }
+  .info-blok li { margin-bottom:4px; line-height:1.5; color:var(--text); }
+  .info-blok-note { font-size:12px; color:var(--dark-green); font-weight:600; }
+
+  /* ALERT BLOK */
+  .alert-blok { background:var(--yellow); border-left:3px solid var(--yellow-dark); border-radius:8px; padding:12px 14px; font-size:13px; margin-top:14px; }
+  .alert-blok-title { font-weight:700; color:var(--dark-green); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+  .alert-blok-note { font-size:12px; color:#6B4A00; font-style:italic; margin-top:6px; }
+
+  /* SPLIT LAYOUT BLOK 2 */
+  .block-split-row { display:grid; grid-template-columns:1fr 230px; gap:16px; align-items:start; }
+  @media(max-width:680px) { .block-split-row { grid-template-columns:1fr; } }
+
+  /* KAART LINK */
+  .kaart-link { display:inline-block; margin-top:14px; padding:8px 16px; background:var(--dark-green); color:var(--white); border-radius:6px; font-size:13px; font-weight:600; text-decoration:none; transition:background .13s; }
+  .kaart-link:hover { background:var(--mid-green); }
+
+  /* GATE */
+  .gate { position:fixed; inset:0; background:rgba(44,44,44,0.35); display:flex; align-items:center; justify-content:center; z-index:2000; }
+  .gate-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-card); padding:24px 26px; max-width:460px; width:90%; }
+  .gate-box h3 { margin-bottom:10px; color:var(--dark-green); }
+  .gate-box p { font-size:14px; line-height:1.6; margin-bottom:14px; }
+  .gate-check { font-size:13px; display:flex; gap:8px; margin-bottom:16px; align-items:flex-start; }
+
+  @media(max-width:680px) {
+    .main-grid { padding:20px 14px 40px; }
+    .intro-grid { grid-template-columns:1fr; }
+    .intro-grid .intro-section-rechts { grid-row:span 1; }
+    .site-header { padding:22px 16px; flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate" class="gate">
+  <div class="gate-box">
+    <h3>Let op</h3>
+    <p>Dit document is een <strong>concept-tekst voor intern gebruik</strong>. Het is bedoeld voor bespreking met de werkgroep en het PMT, en is <strong>niet bedoeld om direct te delen met huisartsen</strong>.<br><br>Zodra je de pagina sluit zijn je aanpassingen of feedback verloren.</p>
+    <label class="gate-check">
+      <input type="checkbox" id="gateCheck">
+      Ik begrijp dit en gebruik het document als basis
+    </label>
+    <button id="gateBtn" class="btn btn-p">Verder</button>
+  </div>
+</div>
+
+<header class="site-header">
+  <img id="header-logo" alt="TPZ Midden-Nederland" class="header-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAJMAjADACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwD36iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaSloASiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiii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29WIKKKKQBRRRQAUUU6ON5pFiiV3d/lAXq1MBqqzNtX5mboK7rwz4d+xILu7T/SD91G/5Zj/ABqTw/4bTT8XN1te67DtH/8AXro67aGH+1IuKFooortKCiiigAooooAKKKKACiiigAooooAKrXL7Z7Nf78xX/wAcc/0qzWbqUwS/0dc/6y8Zf/IEp/pSYGlRRRTAKWkpaAEooooAq6hIY9NupB1WJ2/IGvlevqbVv+QNff8AXB//AEE18s1y4rZEyCiiiuUkKKKKACiiigCxYT/ZdQt7n7vlzI/5HNfVI6Cvk6vqPRLkXugafddfOto5PzUGujDdSol+iiiuwoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKZJGksbI6qyHgg9CKfRQBwOveGHs911ZKzwdWjzyn/ANaubr2I1yOveFhLuutPXEnVouzfSuKvh/tRIlE4uinMrKzKy7WXqGptcOxIUUUUAFFFFABRRRQAUUUUAFFFb2j+GbnUds1xuht/X+J/wqlBt2SAy7HT7nUbjybWPJ7t2UepNegaNoNvpEe4fvJ2+9I38hV6ysLewtxDbxqiAdO5+tWs16FLDqOsty0gooorpKCiiigAooooAKKKKACiiigAooooAKKKKACue1ufb4n8Mwf37id/++YHH/s1dDXEa5chvir4Xte8cNxJj/eRh/7JUz2A7eiiiqAKWkpaAEooooAq6kpk0u7RerQuB+Rr5Xr6uljDxsp6MpH518osu35W+9XJitkTIKKKK5iQooooAKKKKACvob4cXn2zwLpzM2XiVoT/AMBYgfpivnmvY/gzf79J1GwLf6mZZh9GGP8A2WtqD94qJ6fRRRXcUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBg654dh1JWmi2xXX9/HDf71efzxPbzSQSrtdGwR7iuu8R+JfL3WVjJhukkq/w+w9642vNxLg5aGcgooormEFFFFABRRRQAVZsdOutRm2W0LP6t2X6mq1b/hrWv7OuPs87D7NI3/fDetXCKlJJ7AjodI8KW2n7Zbg/aJ/U/dX6CuixRRXqRgorQ1CiiitACiiigAooooAKKKKACiiigAooooAKKKKACiiigAry2S5N98d7dQ3FnE0Y/wC/LE/q9epGvFPA9z/avxWu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AGo4iQv1PSux0v4R65eFXv5oLBD95d3mP+Q4/WmoOWyA8+q9puj6jrE3ladZXFw/fy1yF+p6D8a9s0j4WeHdN2vPHJfyjvcN8uf91cD8812NvbQWsKw28McUa9EjUKB+AreOHl1ZVjyPQ/g/dTFZdbulgTvBB8zfi3QfrXpejeGdI0CPZp9lHExGDJjLt9WPNbFFbwpRjsUFFFFagFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFLSUtACUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAQXNpb3kRiuoIpoz/BKgYfka5q/+HHhfUCzHTVt3b+O2Yx/oPl/SusoqHGL3QHl978GbGTJstWuIvQTxrJ/LbWBdfB7W4ixtryynX0ZmQ/8AoJH617fRiodCHYmx88XPw28Vwf8AMKMo9Ypoz+m7NZ0vhLxFB9/RL/jqVtmccfQGvpiip+rruHKfLMmj6nD9/T7pNvXdAw/pUP2S4/54S/8AfJr6swKMCp+reYcp8nrDKzMqxOzL1CrUi2VyzbVtpWZv4ViNfVmBRgUfVvMOU+XYdC1ib/VaVev/AA/LbMf5CrsHgnxNcf6vRbxf+ukfl/8AoWK+leKOKPqy7hyngFt8LvFNx9+0itx/01nX/wBlLVtWnwY1GT/j81a1i/65RtJ/PbXstFUsPELHnVn8HtEh+a7u7y5b0DBF/QZ/WulsPBXhvTADb6Ra7gOHlXe35tmugorRU4LZFCKoVQqjAHQUtFFaAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFLSUtACUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFLSUtABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z">
+  <div class="header-text">
+    <div class="header-tag">Transformatie Palliatieve Zorg · Midden-Nederland</div>
+    <div class="header-title">Palliatieve zorg: jouw rol als huisarts</div>
+    <div class="header-sub">Verdiepend verhaal voor huisartsen — concept v3</div>
+    <div class="header-bar"></div>
+  </div>
+</header>
+
+<div class="main-grid">
+
+  <div class="intro-zone">
+    <div class="intro-zone-label">Over dit document</div>
+    <div class="intro-grid">
+
+      <div class="intro-section">
+        <div class="intro-heading">Introductie</div>
+        <div class="intro-text">Dit is een verdiepend verhaal voor huisartsen, als aanvulling op het gezamenlijke transformatieverhaal. Het richt zich specifiek op markeren, proactieve zorgplanning en de rol van de casemanager palliatieve zorg.</div>
+      </div>
+
+      <div class="intro-section intro-section-rechts">
+        <div class="intro-heading">De zes blokken</div>
+        <div class="intro-text" style="margin-bottom:12px;">Het verhaal is opgebouwd uit zes blokken die ook los bruikbaar zijn voor communicatie richting huisartsen.</div>
+        <div class="blokken-lijst">
+          <div class="blok-item"><div class="blok-num">1</div><div class="blok-desc">Jij kent de mens achter de patiënt</div></div>
+          <div class="blok-item"><div class="blok-num">2</div><div class="blok-desc">Dat gevoel van "hm" — de Surprise Question</div></div>
+          <div class="blok-item"><div class="blok-num">3</div><div class="blok-desc">Een vlag die voor jou werkt — markeren</div></div>
+          <div class="blok-item"><div class="blok-num">4</div><div class="blok-desc">Luisteren is zorg — proactieve zorgplanning</div></div>
+          <div class="blok-item"><div class="blok-num">5</div><div class="blok-desc">Het overzicht in goede handen — casemanager</div></div>
+          <div class="blok-item"><div class="blok-num">6</div><div class="blok-desc">Jij bent onmisbaar, maar je staat er niet alleen voor</div></div>
+        </div>
+      </div>
+
+      <div class="intro-section">
+        <div class="intro-heading">Relatie tot het basisverhaal</div>
+        <div class="intro-text">Dit verhaal bouwt voort op het gezamenlijke transformatieverhaal. De toon en kernboodschappen sluiten daarop aan. Teksten zijn bewerkbaar en bedoeld als vertrekpunt.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="edit-hint-bar">
+    <span>✏</span>
+    <span><strong>Teksten zijn bewerkbaar:</strong> klik op een alinea om te bewerken. Wijzigingen blijven bewaard zolang de pagina open is en komen automatisch in het samengestelde verhaal onderaan.</span>
+  </div>
+
+  <div id="layers"></div>
+  <div id="preview"></div>
+
+</div>
+
+<footer class="site-footer">
+  <p>Opgesteld door Anneloes Bork</p>
+  <span>Transformatie Palliatieve Zorg Midden-Nederland · 2025–2027</span>
+</footer>
+
+<script>
+const LAYERS = [
+  {
+    num: '1',
+    title: 'Inleiding',
+    desc: 'Jij kent de mens achter de patiënt',
+    text: 'Je ziet mensen op bijzondere momenten. Niet alleen als ze ziek zijn, maar ook wie ze zijn. Je kent de thuissituatie, de zorgen, wat iemand belangrijk vindt. Dat maakt jouw rol in de palliatieve fase uniek. Niet omdat jij alles moet regelen, maar omdat jij vaak de vertrouwde persoon bent die samenwerking rondom patiënt en naasten op gang brengt.\n\nPassende zorg in de palliatieve fase mag niet afhangen van waar een patiënt zich bevindt of welke zorgverlener hij toevallig treft. Vaak begint het bij jou, aan de keukentafel of in de spreekkamer.'
+  },
+  {
+    num: '2',
+    title: 'Herkennen',
+    desc: 'Dat gevoel van "hm" — de Surprise Question',
+    text: 'Je kent het waarschijnlijk. Een patiënt komt binnen, en ergens weet je: dit gaat niet meer goed komen. Je zegt er nog niets van, want het lijkt niet het juiste moment. Of het gesprek gaat over iets anders.\n\nDe surprise question geeft woorden aan dat gevoel: zou ik verrast zijn als deze patiënt binnen een jaar overlijdt? Deze vraag is niet bedoeld om direct op die manier uit te spreken naar de patiënt. Je hoeft haar niet te vertellen dat je denkt dat ze binnen een jaar overlijdt. De surprise question is een vraag die je aan jezelf stelt. En je hoeft er helemaal niet zeker van te zijn. Twijfel je, of is het antwoord nee? Dan is dat een signaal.\n\nDie twijfel is waardevol. Want als je wacht op zekerheid, wacht je misschien wel te lang. Dan is er geen tijd meer om rustig te praten over wat iemand wil. Dan gebeurt dat gesprek op de spoedeisende hulp, onder druk, in plaats van thuis in alle rust en op tijd.'
+  },
+  {
+    num: '3',
+    title: 'Markeren',
+    desc: 'Een vlag die voor jou werkt — A69.01 en A20',
+    text: 'Stel: je patiënt belandt op een zaterdagavond op de huisartsenpost. De dienstdoende arts opent het dossier. Deze arts leest in het HIS over de ziektegeschiedenis. Maar kan mogelijk de situatie niet vertalen naar het stadium waarin de patiënt zich bevindt. Palliatief? Curatief?\n\nDat is precies wat je wilt voorkomen.\n\nDit kan door de patiënt te markeren en ICPC-code A69.01 te gebruiken. ICPC-code A69.01 in het HIS geeft duiding aan de fase van ziekte of kwetsbaarheid van de patiënt. A69.01 is zichtbaar in de episodelijst en wordt automatisch een episode met attentie. Niet als administratieve plicht, maar als houvast voor jou, je collega\'s en iedereen die deze patiënt in beeld krijgt.\nOp het moment dat je markeert, bied je de patiënt ook een casemanager palliatieve zorg aan. De casemanager wordt het vaste aanspreekpunt voor de patiënt en naasten, en houdt overzicht over de zorg en ondersteuning die nodig is.\nDit is een regionale afspraak. Alle RHO\'s in Midden-Nederland staan hierachter. Je hoeft niet terug te gaan naar alle patiënten die je al kent. Begin vandaag, en vul aan als mensen op consult komen.'
+  },
+  {
+    num: '4',
+    title: 'Proactieve zorgplanning',
+    desc: 'Luisteren is zorg',
+    text: 'Een PZP-gesprek gaat over de vier dimensies van iemands leven: het lichamelijke, het psychische, het sociale en zingeving. Dat klinkt misschien als een grote opdracht.\n\nWat veel zorgverleners niet weten: patiënten stellen het juist op prijs als jij dit gesprek begint. Ze wachten er soms op, en durven er zelf niet over te beginnen. Door het initiatief te nemen, geef je iemand de ruimte om te zeggen wat er echt speelt en wat de zorgbehoeften en doelen zijn.\n\nEn dat hoef jij dan niet op te lossen. Een patiënt die vertelt dat hij bang is om zijn kleinkinderen niet meer te zien opgroeien, vraagt jou niet om dat op te lossen. Hij wil gehoord worden. Dat jij die angst kent, maakt al verschil. Dat je het vastlegt, zodat ook de casemanager en andere zorgverleners weten wat er speelt, maakt het verschil nog groter. Zij kunnen de zorg dan aanpassen aan de behoefte en doelen van de patiënt.\n\nVoer je een Proactieve Zorgplanning gesprek, open dan ICPC A20. Leg alle informatie vast in episode ICPC A20 en deel dit, met toestemming van de patiënt, met andere zorgprofessionals. Herhaal het gesprek bij grote veranderingen in het ziekteproces of als de patiënt dat wenst.'
+  },
+  {
+    num: '5',
+    title: 'Casemanager palliatieve zorg',
+    desc: 'Het overzicht in goede handen',
+    text: 'Als je een patiënt aanmeldt bij de casemanager palliatieve zorg, geef je de regie niet uit handen. Je borgt hem juist.\n\nDe casemanager is een verpleegkundige met een afgeronde post-HBO opleiding palliatieve zorg. Zij is het vaste aanspreekpunt voor de patiënt en naasten, coördineert de proactieve zorgplanning en zorgt dat zorgverleners onderling goed afstemmen. Dat er niets tussen wal en schip valt. Dat de patiënt niet steeds opnieuw zijn verhaal hoeft te doen.\n\nDat zijn taken die nu vaak bij de huisarts liggen, ook als dat eigenlijk niet nodig hoeft te zijn. Door tijdig aan te melden, houd jij de eindverantwoordelijkheid over de behandeling, maar draag je het overzicht over aan iemand die daar specifiek voor is opgeleid.'
+  },
+  {
+    num: '6',
+    title: 'Afsluiting',
+    desc: 'Jij bent onmisbaar, maar je staat er niet alleen voor',
+    text: 'Van een kwestie van geluk naar een staat van vertrouwen. Dat is de koers in Midden-Nederland. Of iemand passende palliatieve zorg krijgt, mag niet afhangen van toeval. Niet van welke zorgprofessional je treft, of op welk moment je zorg nodig hebt.\n\nJij bent degene die het in gang zet. Maar je doet het samen. Met collega\'s die signaleren, de casemanager die coördineert, en met alle anderen die rondom de patiënt en naasten betrokken zijn. We werken samen aan een staat van vertrouwen, en dat doe je niet alleen.'
+  }
+];
+
+const LABELS = [
+  { key: 'passend',     label: '✓ Passend' },
+  { key: 'verkeerd',    label: '⚠ Kan verkeerd vallen' },
+  { key: 'onduidelijk', label: '? Onduidelijk' },
+  { key: 'mist',        label: '✎ Mist concreetheid' }
+];
+const LABEL_NAMES = { passend: 'Passend', verkeerd: 'Kan verkeerd vallen', onduidelijk: 'Onduidelijk', mist: 'Mist concreetheid' };
+
+const texts = LAYERS.map(l => l.text);
+const fb    = LAYERS.map(() => ({ labels: new Set(), note: '' }));
+
+function build() {
+  const container = document.getElementById('layers');
+  LAYERS.forEach((layer, i) => {
+    const el = document.createElement('div');
+    el.className = 'layer';
+
+    const head = document.createElement('div');
+    head.className = 'layer-head';
+    head.innerHTML = '<div class="layer-num">' + layer.num + '</div><div><div class="layer-title">' + layer.title + '</div><div class="layer-desc">' + layer.desc + '</div></div>';
+    el.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className = 'layer-body';
+
+    const hint = document.createElement('span');
+    hint.className = 'edit-hint-inline';
+    hint.textContent = 'klik op de tekst om te bewerken';
+    body.appendChild(hint);
+
+    const textEl = document.createElement('div');
+    textEl.className = 'text-block editable';
+    textEl.contentEditable = 'true';
+    textEl.spellcheck = false;
+    textEl.id = 'txt-' + i;
+    textEl.textContent = layer.text;
+    textEl.addEventListener('input', function() { texts[i] = textEl.textContent; updatePreview(); });
+    if (i === 1) {
+      const row = document.createElement('div');
+      row.className = 'block-split-row';
+      row.appendChild(textEl);
+      const infoBlok = document.createElement('div');
+      infoBlok.className = 'info-blok';
+      infoBlok.innerHTML = '<div class="info-blok-title">ℹ Concrete signalen</div><ul><li>Frequent ziekenhuisbezoek</li><li>Achteruitgang kwaliteit van leven</li><li>Meerdere chronische aandoeningen</li><li>Patiënt spreekt over dood of afronding</li></ul><div class="info-blok-note">Bij twijfel: markeer. Je hoeft niet zeker te zijn.</div>';
+      row.appendChild(infoBlok);
+      body.appendChild(row);
+    } else {
+      body.appendChild(textEl);
+    }
+    if (i === 2) {
+      const kaartLink = document.createElement('a');
+      kaartLink.href = 'instructiekaart_A69.01.html';
+      kaartLink.target = '_blank';
+      kaartLink.className = 'kaart-link';
+      kaartLink.textContent = 'Bekijk de instructiekaart A69.01 →';
+      body.appendChild(kaartLink);
+    }
+    if (i === 3) {
+      const alertBlok = document.createElement('div');
+      alertBlok.className = 'alert-blok';
+      alertBlok.innerHTML = '<div class="alert-blok-title">⚠ Interne notitie</div><div class="alert-blok-note">Let op: deze ICPC A20-instructie moet gecontroleerd worden tegen de werkafspraak rond Viplive voordat dit blok naar huisartsen wordt verzonden.</div>';
+      body.appendChild(alertBlok);
+    }
+
+    el.appendChild(body);
+
+    const fbEl = document.createElement('div');
+    fbEl.className = 'feedback';
+
+    const ftitle = document.createElement('div');
+    ftitle.className = 'feedback-title';
+    ftitle.textContent = 'Jouw reactie op dit blok';
+    fbEl.appendChild(ftitle);
+
+    const labelsDiv = document.createElement('div');
+    labelsDiv.className = 'labels';
+    LABELS.forEach(function(ld) {
+      const btn = document.createElement('button');
+      btn.className = 'lbtn ' + ld.key;
+      btn.id = 'lbl-' + i + '-' + ld.key;
+      btn.textContent = ld.label;
+      btn.addEventListener('click', function() {
+        if (fb[i].labels.has(ld.key)) { fb[i].labels.delete(ld.key); btn.classList.remove('active'); }
+        else                          { fb[i].labels.add(ld.key);    btn.classList.add('active'); }
+        updatePreview();
+      });
+      labelsDiv.appendChild(btn);
+    });
+    fbEl.appendChild(labelsDiv);
+
+    const ta = document.createElement('textarea');
+    ta.className = 'fb';
+    ta.placeholder = 'Toelichting (optioneel)...';
+    ta.id = 'note-' + i;
+    ta.addEventListener('input', function() { fb[i].note = ta.value; updatePreview(); });
+    fbEl.appendChild(ta);
+
+    el.appendChild(fbEl);
+    container.appendChild(el);
+  });
+
+  buildPreview();
+}
+
+function buildPreview() {
+  const container = document.getElementById('preview');
+  container.innerHTML = '';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'preview-wrap';
+
+  const head = document.createElement('div');
+  head.className = 'preview-head';
+  head.innerHTML = '<h2>Samengesteld verhaal</h2><span>Alle blokken</span>';
+  wrap.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'preview-body';
+  body.id = 'prev-body';
+  wrap.appendChild(body);
+
+  const btnRow = document.createElement('div');
+  btnRow.className = 'btn-row';
+  btnRow.innerHTML = '<button class="btn btn-p" onclick="copyStory()">Kopieer verhaal</button><button class="btn btn-g" onclick="resetAll()">Reset feedback</button><span class="copy-msg" id="copymsg">Gekopieerd.</span>';
+  wrap.appendChild(btnRow);
+
+  const tw = document.createElement('div');
+  tw.className = 'table-wrap';
+  tw.innerHTML = '<h3>Overzicht feedback per blok</h3><table class="ftable"><thead><tr><th>Blok</th><th>Labels</th><th>Toelichting</th></tr></thead><tbody id="ftable-body"></tbody></table><div style="margin-top:12px;display:flex;gap:10px;align-items:center;"><button class="btn btn-p" onclick="copyTable()">Kopieer feedback als tekst</button><span class="copy-msg" id="tablemsg">Gekopieerd.</span></div>';
+  wrap.appendChild(tw);
+
+  container.appendChild(wrap);
+  updatePreview();
+}
+
+function updatePreview() {
+  const body = document.getElementById('prev-body');
+  if (!body) return;
+  var html = '';
+  LAYERS.forEach(function(layer, i) {
+    html += '<p>' + esc(texts[i]) + '</p>';
+  });
+  body.innerHTML = html;
+
+  const tbody = document.getElementById('ftable-body');
+  if (!tbody) return;
+  var rows = '';
+  LAYERS.forEach(function(layer, i) {
+    var labStr = Array.from(fb[i].labels).map(function(k) { return LABEL_NAMES[k]; }).join(', ') || '';
+    var note = fb[i].note.trim();
+    rows += '<tr><td><div class="td-layer">Blok ' + layer.num + ': ' + layer.title + '</div></td><td>' + (labStr || '<span class="no-input">-</span>') + '</td><td>' + (esc(note) || '<span class="no-input">-</span>') + '</td></tr>';
+  });
+  tbody.innerHTML = rows;
+}
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function resetAll() {
+  LAYERS.forEach(function(_, i) {
+    fb[i].labels.clear();
+    fb[i].note = '';
+    LABELS.forEach(function(ld) {
+      var btn = document.getElementById('lbl-' + i + '-' + ld.key);
+      if (btn) btn.classList.remove('active');
+    });
+    var ta = document.getElementById('note-' + i);
+    if (ta) ta.value = '';
+  });
+  updatePreview();
+}
+
+function copyStory() {
+  var out = texts.join('\n\n');
+  navigator.clipboard.writeText(out.trim()).then(function() {
+    var m = document.getElementById('copymsg');
+    if (m) { m.style.display='inline'; setTimeout(function(){m.style.display='none';}, 2500); }
+  });
+}
+
+function copyTable() {
+  var out = 'Blok\tLabels\tToelichting\n';
+  LAYERS.forEach(function(layer, i) {
+    var lab  = Array.from(fb[i].labels).map(function(k){return LABEL_NAMES[k];}).join(', ') || '-';
+    var note = fb[i].note.trim() || '-';
+    out += 'Blok ' + layer.num + ': ' + layer.title + '\t' + lab + '\t' + note + '\n';
+  });
+  navigator.clipboard.writeText(out.trim()).then(function() {
+    var m = document.getElementById('tablemsg');
+    if (m) { m.style.display='inline'; setTimeout(function(){m.style.display='none';}, 2500); }
+  });
+}
+
+build();
+
+var gate  = document.getElementById('gate');
+var btn   = document.getElementById('gateBtn');
+var check = document.getElementById('gateCheck');
+btn.onclick = function() {
+  if (!check.checked) { alert('Bevestig eerst dat je dit begrijpt.'); return; }
+  gate.style.display = 'none';
+};
+</script>
+</body>
+</html>
